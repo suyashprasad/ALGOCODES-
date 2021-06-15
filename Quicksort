@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+int partition(int arr[],int start,int end)    //start,end both index
+{
+	int i,j,k; int pivot;                    //pivot stores the pivot element value and i stores the partition index
+	pivot=arr[end];i=start;                 //pivot element choosen to be rightmost
+	for(j=start;j<end;j++)
+	{
+		if(arr[j]<pivot)
+		{
+			swap(arr[i],arr[j]);                     
+			i++;
+		}
+	}
+	swap(arr[end],arr[i]);
+	return i;
+}
+void quicksort(int arr[],int start,int end)
+{   int p;                          //will store the sorted index of pivot
+	if(start<end)
+	{
+		p=partition(arr,start,end);            
+		quicksort(arr,start,p-1);    //for sorting the left side
+		quicksort(arr,p+1,end);           //for sorting the right side
+		
+	}
+}
+
+int main() {
+	// your code goes here
+	int arr[]={2,2,2,1,0,5,5,0};
+	quicksort(arr,0,7);
+	for(int i=0;i<8;i++)
+	cout<<arr[i]<<" ";
+	return 0;
+}
