@@ -15,3 +15,41 @@ subset.pop_back();
 search(k+1);
      }
 }
+
+
+
+EX- TO PRINT ALL OF THE SUBSETS OF THE VECTOR {1,2,3,4}.
+#include <stdio.h>
+#include<iostream>
+#include<vector>
+using namespace std;
+vector<vector<int>>subset;    //FOR STORING ALL OF THE GENERATED SUBSET
+vector<int>sub;              //FOR STORING THE SUBSET ONE AT A TIME
+void helper(vector<int>arr,int pos)
+{  if(arr.size()==pos)
+{ 
+    subset.push_back(sub);         //PERFORMING THE OPERATIONS WHEN THIS IF CONDITION IS TRIGGERED
+    return;
+}
+else {
+    sub.push_back(arr[pos]);
+    helper(arr,pos+1);      
+    sub.pop_back();
+    helper(arr,pos+1);
+}
+}
+
+int main()
+{
+    vector<int>arr={1,2,3,4};
+    helper(arr,0);
+    for(int i=0;i<subset.size();i++)
+    {
+        for(int j=0;j<subset[i].size();j++)      
+        cout<<subset[i][j]<<" ";        //PRINTS ALL THE SUBSETS
+        cout<<endl;
+    }
+
+
+    return 0;
+}
