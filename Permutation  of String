@@ -1,0 +1,59 @@
+//FROM https://helloacm.com/c-coding-exercise-permutations/
+//CAN ALSO USE next_permutation and prev_permutation as well if C++STL available
+
+The recursive algorithm will partition the array as two parts: the permutated list and the remaining elements. Then, for current position e.g. 0, we can have n choices (by swapping A[0] to A[x] where x is from 0 to n-1), then we permutate the list recursively with current position advanced one position – remember to restore the position after the recursive calls.
+
+Once the position reaches beyond the end – meaning we have exhausted the remaining elements, we add the current sequence into the final permutation list.
+
+
+//CODE
+
+
+class Solution {
+public:
+    void permute(vector<int>& nums, int n, vector<vector<int>>& r) {
+        if (n == nums.size()) {
+            r.push_back(nums); // save this as one of the possibilities
+        } else {
+            for (int i = n; i < nums.size(); i ++) {
+                swap(nums[i], nums[n]);
+                permute(nums, n + 1, r); // placing next position
+                swap(nums[i], nums[n]);  // restoring
+            }
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> r;
+        permute(nums, 0, r);
+        return r;
+    }
+};
+
+
+
+
+
+
+ONE EXAMPLE(TO PERMUTATE A STRING)
+
+class Solution {
+public:
+    void permute(vector<int>& nums, int n, vector<vector<int>>& r) {
+        if (n == nums.size()) {
+            r.push_back(nums); // save this as one of the possibilities
+        } else {
+            for (int i = n; i < nums.size(); i ++) {
+                swap(nums[i], nums[n]);
+                permute(nums, n + 1, r); // placing next position
+                swap(nums[i], nums[n]);  // restoring
+            }
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> r;
+        permute(nums, 0, r);
+        return r;
+    }
+};
