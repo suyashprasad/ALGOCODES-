@@ -1,0 +1,17 @@
+// USING BACKTRACKING METHOD
+//FROM GUIDE TO COMPETITVE PROGRAMMING BOOK
+  //PSEUDOCODE
+  
+  void search(int k) {
+if (k == n+1) {
+// process subset  //u can save the subset in another container or perform any other operation
+} 
+else {
+// include k in the subset
+subset.push_back(k);                             //works on the principle that first u choose a element to be present and then also choose it tobe not present
+search(k+1);
+subset.pop_back();
+// don’t include k in the subset
+search(k+1);
+     }
+}
