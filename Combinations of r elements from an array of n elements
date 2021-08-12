@@ -1,0 +1,117 @@
+// C++ Program to print all combination of
+// size r in an array of size n
+#include <bits/stdc++.h>
+using namespace std;
+void combinationUtil(int arr[], int n, int r,
+					int index, int data[], int i);
+
+// The main function that prints all
+// combinations of size r in arr[]
+// of size n. This function mainly
+// uses combinationUtil()
+void printCombination(int arr[], int n, int r)
+{
+	// A temporary array to store
+	// all combination one by one
+	int data[r];
+
+	// Print all combination using
+	// temporary array 'data[]'
+	combinationUtil(arr, n, r, 0, data, 0);
+}
+
+/* arr[] ---> Input Array
+n ---> Size of input array                                                             //THIS DOES NOT HANDLE DUPLICATES, TO HANDLE THEM U NEED TO SORT THE DATA ARRAY AND THEN USE MAP TO DO IT
+
+r ---> Size of a combination to be printed
+index ---> Current index in data[]
+data[] ---> Temporary array to store current combination
+i ---> index of current element in arr[] */
+void combinationUtil(int arr[], int n, int r,
+					int index, int data[], int i)
+{
+	// Current combination is ready, print it
+	if (index == r)
+	{
+		for (int j = 0; j < r; j++)
+			cout << data[j] << " ";
+		cout << endl;
+		return;
+	}
+
+	// When no more elements are there to put in data[]
+	if (i >= n)
+		return;
+
+	// current is included, put next at next location
+	data[index] = arr[i];
+	combinationUtil(arr, n, r, index + 1, data, i + 1);
+
+	// current is excluded, replace it with next (Note that
+	// i+1 is passed, but index is not changed)
+	combinationUtil(arr, n, r, index, data, i+1);
+}
+
+// Driver code
+int main()
+{
+	int arr[] = {1, 2, 3, 4, 5};
+	int r = 3;
+	int n = sizeof(arr)/sizeof(arr[0]);
+	printCombination(arr, n, r);
+	return 0;
+}
+
+
+
+
+//MY IMPLEMENTATION
+
+
+ #include<vector>
+ #include<algorithm>
+ #include<iostream>
+ 
+ using namespace std;
+ vector<vector<int>> res;
+    vector<int> v;
+    void combinations(vector<int> nums , int k , int i)
+    {
+        if(k == 0)
+        {
+            res.push_back(v);
+            return;
+        }
+        if(nums.size() - i < k)
+        {
+            return;
+        }
+        // not include ith element
+        combinations(nums , k , i + 1);
+        
+        // include ith element
+        v.push_back(nums[i]);
+        combinations(nums , k - 1 , i + 1);        
+        v.pop_back();
+    }
+    
+    vector<vector<int>> combine(int n, int k) {
+        vector<int> nums;
+        for(int i = 0 ; i < n ; i++)                           
+        {
+            nums.push_back(i+1);                        //SAMPLE DATA HERE 
+        }
+        combinations(nums , k , 0);
+        return res;                               //RETURNS THE CORRECT COMBINATIONS 
+    }
+    int main()
+    {
+        vector<vector<int>>g=combine(5,3);
+        for(int i=0;i<g.size();i++)
+        { for(int j=0;j<g[i].size();j++)
+          cout<<g[i][j]<<" ";
+         cout<<endl;
+        }
+            return 0;
+    }
+
