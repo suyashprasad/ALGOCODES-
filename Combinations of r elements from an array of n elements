@@ -75,11 +75,11 @@ int main()
  using namespace std;
  vector<vector<int>> res;
     vector<int> v;
-    void combinations(vector<int> nums , int k , int i)
+    void combinations(vector<int> nums , int k , int i)     //K IS THE NUMBER OF ELEMENTS ALLOWED IN EACH SUBSET   i is the current element in consideration
     {
         if(k == 0)
         {
-            res.push_back(v);
+            res.push_back(v);     
             return;
         }
         if(nums.size() - i < k)
